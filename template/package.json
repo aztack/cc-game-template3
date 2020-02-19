@@ -1,0 +1,25 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "main": "index.js",
+  "scripts": {
+    "init": "node bin/init.js",
+    "install": "node bin/install.js",
+    "start": "node bin/dev.js",
+    "dev": "node bin/dev.js"
+  },
+  "keywords": [
+    "cocos",
+    "game"
+  ],
+  "author": "{{author}}",
+  "ccmodules": {
+    "group": "{{ccmodulesgroup}}"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "shelljs": "^0.8.3"
+  }
+}
