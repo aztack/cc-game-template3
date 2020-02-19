@@ -5,7 +5,7 @@ Install
 ====
 ```bash
 #init project
-vue init lingobus/cc-game-template3 <project-name>
+vue init aztack/cc-game-template3 <project-name>
 cd <project-name>
 ```
 
