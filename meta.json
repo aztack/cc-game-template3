@@ -26,6 +26,6 @@
       "label": "cc module git group, for example: git+ssh://git@code.company.com/group/subgroup"
     }
   },
-  "skipInterpolation": "creator.d.ts",
+  "skipInterpolation": ["src/creator.d.ts", "node_modules/**", "src/node_modules/**"],
   "completeMessage": "Now run `npm run init` before open this project with `npm start`"
 }
