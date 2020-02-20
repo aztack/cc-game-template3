@@ -10,3 +10,5 @@ shell.mv(srcDir, newDir);
   console.log(`creating ${dir} folder`);
   shell.mkdir('-p', `${newDir}/assets/${dir}`);
 });
+console.log(`creating zips folder`);
+shell.mkdir('-p', './zips');

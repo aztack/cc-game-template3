@@ -1,4 +1,5 @@
-require('./utils.js').utils.cocos(`--path ${utils.projectDir} --build ${[
+const utils = require('./utils.js')
+utils.cocos(`--path ${utils.projectDir} --build ${[
   'debug=false',
   'platform=web-mobile',
   'inlineSpriteFrames=true',
