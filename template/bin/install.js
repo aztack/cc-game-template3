@@ -2,7 +2,8 @@ require('colors');
 const path = require('path');
 const fs = require('fs');
 const shell = require('shelljs');
-const pkg = require(path.join(__dirname,'../package.json'));
+const utils = require('./utils.js');
+const pkg = utils.pkg;
 const projectDir = pkg.name;
 const groupUrl = pkg.ccmodules.group.replace(/\/$/, '');
 
@@ -24,9 +25,9 @@ const modsRepos = mods.map(function (mod) {
   return `${groupUrl}/${mod}.git`;
 });
 
-const ccModulesDir = `${projectDir}/assets/scripts/cc_modules/`;
-const nodeModulesDir = `${projectDir}/assets/scripts/node_modules/`;
-shell.exec(`npm i --verbose --save --prefix ${projectDir}/assets/scripts/ ${modsRepos.join(' ')}`)
+const ccModulesDir = utils.ccModulesDir;
+const nodeModulesDir = utils.nodeModulesDir;
+utils.npm(`i --verbose --save --prefix ${projectDir}/assets/scripts/ ${modsRepos.join(' ')}`)
 shell.mkdir('-p', ccModulesDir);
 shell.mv(`${nodeModulesDir}*`, ccModulesDir)
 shell.rm('-rf', nodeModulesDir)
