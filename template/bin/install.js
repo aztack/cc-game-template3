@@ -6,6 +6,7 @@ const utils = require('./utils.js');
 const pkg = utils.pkg;
 const projectDir = pkg.name;
 const groupUrl = pkg.ccmodules.group.replace(/\/$/, '');
+const typeToDir = pkg.ccmodules.dirs || {};
 
 const argv = process.argv;
 if (!fs.existsSync(path.join(__dirname, `../${projectDir}`))) {
@@ -21,13 +22,36 @@ if (mods.length <= 0) {
   console.log(`Start to install: ${mods.join(', ')}`.green.bold);
 }
 
-const modsRepos = mods.map(function (mod) {
-  return `${groupUrl}/${mod}.git`;
+const modGroup = {
+  "comp": [],
+  "util": [],
+  "anim": [],
+  "audio": [],
+  "prefab": [],
+  "tex": [],
+  "scene": [],
+  "font": []
+};
+mods.forEach(function (mod) {
+  const type = mod.split('-')[0];
+  const group = modGroup[type];
+  if (!group) return;
+  group.push(mod);
 });
 
-const ccModulesDir = utils.ccModulesDir;
-const nodeModulesDir = utils.nodeModulesDir;
-utils.npm(`i --verbose --save --prefix ${projectDir}/assets/scripts/ ${modsRepos.join(' ')}`)
-shell.mkdir('-p', ccModulesDir);
-shell.mv(`${nodeModulesDir}*`, ccModulesDir)
-shell.rm('-rf', nodeModulesDir)
+for (let type in modGroup) {
+  const group = modGroup[type];
+  if (!group || !group.length) continue;
+  const modsRepos = group.map(function (mod) {
+    return `${groupUrl}/${mod}.git`;
+  });
+  const dir = typeToDir[type];
+  const ccModulesDir = `${projectDir}/${dir}/cc_modules/`;
+  const nodeModulesDir = `${projectDir}/${dir}/node_modules/`;
+  console.log(`Installing ${dir.replace('assets/', '')}...`.green.bold);
+  utils.npm(`i --verbose --save --prefix ${projectDir}/${dir}/ ${modsRepos.join(' ')}`);
+  shell.mkdir('-p', ccModulesDir);
+  shell.mv(`${nodeModulesDir}*`, ccModulesDir);
+  shell.rm('-rf', nodeModulesDir);
+}
+console.log(`Done!`);

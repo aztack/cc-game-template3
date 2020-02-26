@@ -20,7 +20,17 @@
   ],
   "author": "{{author}}",
   "ccmodules": {
-    "group": "{{ccmodulesgroup}}"
+    "group": "{{ccmodulesgroup}}",
+    "dirs": {
+      "comp": "assets/scripts",
+      "util": "assets/scripts",
+      "anim": "assets/animations",
+      "audio": "assets/audios",
+      "prefab": "assets/prefabs",
+      "tex": "assets/textures",
+      "scene": "assets/scenes",
+      "font": "assets/fonts"
+    }
   },
   "dependencies": {},
   "devDependencies": {

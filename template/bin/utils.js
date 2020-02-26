@@ -8,8 +8,6 @@ const archiver = require('archiver');
 module.exports = {
   pkg: pkg,
   projectDir: pkg.name,
-  ccModulesDir: `${pkg.name}/assets/scripts/cc_modules/`,
-  nodeModulesDir: `${pkg.name}/assets/scripts/node_modules/`,
   zipDir: `zips`,
   checkEnv() {
     const platform = process.platform;
