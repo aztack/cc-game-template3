@@ -25,7 +25,6 @@
   "dependencies": {},
   "devDependencies": {
     "archiver": "^3.1.1",
-    "cc-game-uploader": "git+ssh://git@code.vipkid.com.cn:3590/nezha-fe/infra/cc-game-uploader.git",
     "colors": "^1.4.0",
     "shelljs": "^0.8.3"
   }

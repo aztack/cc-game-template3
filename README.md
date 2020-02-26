@@ -4,9 +4,14 @@ A Cocos2d-js Game Template
 Install
 ====
 ```bash
-#init project
-vue init aztack/cc-game-template3 <project-name>
+# clone this template
+$ git clone https://github.com/aztack/cc-game-template3.git
+# init project
+$ vue init ./cc-game-template3 <project-name>
 cd <project-name>
+# follow thes instructions in readme
+cat README.md
+
 ```
 
 Conventions
