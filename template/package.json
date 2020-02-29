@@ -22,14 +22,14 @@
   "ccmodules": {
     "group": "{{ccmodulesgroup}}",
     "dirs": {
-      "comp": "assets/scripts",
-      "util": "assets/scripts",
-      "anim": "assets/animations",
-      "audio": "assets/audios",
-      "prefab": "assets/prefabs",
-      "tex": "assets/textures",
-      "scene": "assets/scenes",
-      "font": "assets/fonts"
+      "comp": "assets",
+      "util": "assets",
+      "anim": "assets",
+      "audio": "assets",
+      "prefab": "assets",
+      "tex": "assets",
+      "scene": "assets",
+      "font": "assets"
     }
   },
   "dependencies": {},
