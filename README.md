@@ -22,5 +22,5 @@ Conventions
 - audios: all audio files
 - scenes: scene files along with their same named script files.
 - scripts: all other script files
-- scripts/cc_modules: managed packages
+- cc_modules: managed packages
 - textures: all textures
