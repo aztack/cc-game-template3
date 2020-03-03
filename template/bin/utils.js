@@ -1,4 +1,5 @@
 require('colors')
+const os = require('os');
 const fs = require('fs');
 const crypto = require('crypto')
 const shell = require('shelljs');
@@ -11,7 +12,7 @@ module.exports = {
   zipDir: `zips`,
   checkEnv() {
     const platform = process.platform;
-    if (['win32', 'darwin'].indexOf(platform) < 0) {
+    if (['win32', 'darwin'].indexOf(platform) < 0 && !isWsl()) {
       console.log(`Do not support platform ${platform}`);
       process.exit(-1);
     }
@@ -106,3 +107,16 @@ function formatDate(withTime, noSec, sep1, sep2, sep3) {
   if (!noSec) part2 = part2 + `${sep2}${s}`
   return withTime ? part1 + sep3 + part2 : part1
 }
+
+const isWsl = () => {
+  const re = /microsoft/i;
+	if (process.platform !== 'linux') return false;
+
+	if (os.release().match(re)) return true;
+
+	try {
+		return fs.readFileSync('/proc/version', 'utf8').match(re);
+	} catch (e) {
+		return false;
+	}
+};
