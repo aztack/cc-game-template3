@@ -10,6 +10,7 @@ module.exports = {
   pkg: pkg,
   projectDir: pkg.name,
   zipDir: `zips`,
+  isWsl: isWsl,
   checkEnv() {
     const platform = process.platform;
     if (['win32', 'darwin'].indexOf(platform) < 0 && !isWsl()) {
@@ -29,7 +30,12 @@ module.exports = {
     this.checkEnv();
     const cmd =`${process.env.CCBIN} ${arg}`;
     if (verbose) console.log(cmd.green.bold);
-    shell.exec(cmd);
+    if (isWsl()) {
+      fs.writeFileSync('./bin/run-cocos.sh', cmd);
+      shell.exec('npm run cocos');
+    } else {
+      shell.exec(cmd);
+    }
   },
   npm(arg, verbose) {
     if (!shell.which('npm')) {
@@ -70,13 +76,13 @@ module.exports = {
 
 const BUFFER_SIZE = 8192
 function md5FileSync (filename, length) {
+  console.log(filename);
   const fd = fs.openSync(filename, 'r')
   const hash = crypto.createHash('md5')
   const buffer = Buffer.alloc(BUFFER_SIZE)
 
   try {
     let bytesRead
-
     do {
       bytesRead = fs.readSync(fd, buffer, 0, BUFFER_SIZE)
       hash.update(buffer.slice(0, bytesRead))
@@ -108,7 +114,7 @@ function formatDate(withTime, noSec, sep1, sep2, sep3) {
   return withTime ? part1 + sep3 + part2 : part1
 }
 
-const isWsl = () => {
+function isWsl() {
   const re = /microsoft/i;
 	if (process.platform !== 'linux') return false;
 
