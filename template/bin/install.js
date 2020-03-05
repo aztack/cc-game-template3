@@ -22,20 +22,14 @@ if (mods.length <= 0) {
   console.log(`Start to install: ${mods.join(', ')}`.green.bold);
 }
 
-const modGroup = {
-  "comp": [],
-  "util": [],
-  "anim": [],
-  "audio": [],
-  "prefab": [],
-  "tex": [],
-  "scene": [],
-  "font": []
-};
+const modGroup = {};
+const modGroup = {};
 mods.forEach(function (mod) {
   const type = mod.split('-')[0];
   const group = modGroup[type];
-  if (!group) return;
+  if (!group) {
+    group = modGroup[type] = [];
+  }
   group.push(mod);
 });
 
