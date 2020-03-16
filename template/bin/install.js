@@ -25,7 +25,7 @@ if (mods.length <= 0) {
 const modGroup = {};
 mods.forEach(function (mod) {
   const type = mod.split('-')[0];
-  const group = modGroup[type];
+  let group = modGroup[type];
   if (!group) {
     group = modGroup[type] = [];
   }
