@@ -16,10 +16,3 @@
 # Start development
 
 `npm start` or `npm run dev`
-
-# Install npm packages
-
-```bash
-$ cd {{name}}
-$ npm i --save --verbose rxjs lodash
-```
