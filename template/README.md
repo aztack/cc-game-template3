@@ -6,7 +6,7 @@
 `npm run init`
 
 # Install modules
-`npm run install -- module-name`
+`npm run install-module -- module1 module2`
 
 # Set environment variable CCBIN
 
