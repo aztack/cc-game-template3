@@ -2,7 +2,7 @@ const utils = require('./utils.js');
 const date = utils.date();
 const zipFileName = `${utils.pkg.name}-${date}.zip`;
 const zipFilePath = `./${utils.zipDir}/${zipFileName}`;
-utils.mkdir(`./${utils.zipDir}`).zip('./src/build', zipFilePath).then(function(){
+utils.mkdir(`./${utils.zipDir}`).zip('./{{name}}/build', zipFilePath).then(function(){
   const hashOfZip = utils.md5Of(zipFilePath, 7);
   const zipFileNameHashedPath = zipFilePath.replace('.zip', `-${hashOfZip}.zip`);
   utils.rename(zipFilePath, zipFileNameHashedPath);
