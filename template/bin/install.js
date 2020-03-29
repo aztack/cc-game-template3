@@ -38,7 +38,7 @@ for (let type in modGroup) {
   const modsRepos = group.map(function (mod) {
     return `${groupUrl}/${mod}.git`;
   });
-  const dir = typeToDir[type];
+  const dir = typeToDir[type] || 'assets';
   const ccModulesDir = `${projectDir}/${dir}/cc_modules/`;
   const nodeModulesDir = `${projectDir}/${dir}/node_modules/`;
   console.log(`Installing ${dir.replace('assets/', '')}...`.green.bold);
