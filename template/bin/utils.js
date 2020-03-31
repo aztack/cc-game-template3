@@ -1,10 +1,17 @@
 require('colors')
 const os = require('os');
 const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
 const crypto = require('crypto')
 const shell = require('shelljs');
 const pkg = require('../package.json');
 const archiver = require('archiver');
+const inquirer = require('inquirer');
+
+const zipIgnores = {
+  'jsb-link': ['frameworks/**', '.cocos-project.json', 'cocos-project-template.json', '*.zip']
+};
 
 module.exports = {
   pkg: pkg,
@@ -54,18 +61,42 @@ module.exports = {
     shell.mv(src, target);
   },
   zip(source, output) {
-    const archive = archiver('zip', { zlib: { level: 9 }});
-    const stream = fs.createWriteStream(output);
-  
+    const builds = glob.sync(`${source}/*`).filter(p => fs.statSync(p).isDirectory());
+    const platforms = builds.map(p => path.basename(p));
+    const platformToBuildMap = builds.reduce((res, build, i) => {
+      res[platforms[i]] = build;
+      return res;
+    }, {});
+
+    let p = Promise.resolve(platforms[0]);
+    if (platforms.length > 0) {
+      p = inquirer.prompt([{
+          type: 'list',
+          name: 'platform',
+          message: 'Please select platform to be pack',
+          choices: platforms
+        }])
+        .then(answers => answers.platform);
+    }
+
     return new Promise((resolve, reject) => {
-      archive
-        .directory(source, false)
-        .on('error', err => reject(err))
-        .pipe(stream)
-      ;
-  
-      stream.on('close', () => resolve());
-      archive.finalize();
+      p.then(platform => {
+        const archive = archiver('zip', { zlib: { level: 9 }});
+        output = output.replace('.zip', `-${platform}.zip`);
+        const stream = fs.createWriteStream(output);
+        const cwd = platformToBuildMap[platform];
+        archive
+          .glob(`**/*`, {
+            cwd: cwd,
+            ignore: zipIgnores[platform] || []
+          })
+          .on('error', err => reject(err))
+          .pipe(stream)
+        ;
+
+        stream.on('close', () => resolve(output));
+        archive.finalize();
+      })
     });
   },
   date(when) {

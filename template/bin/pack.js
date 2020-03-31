@@ -1,12 +1,16 @@
 const utils = require('./utils.js');
+const shell = require('shelljs');
 const date = utils.date();
 const zipFileName = `${utils.pkg.name}-${date}.zip`;
 const zipFilePath = `./${utils.zipDir}/${zipFileName}`;
-utils.mkdir(`./${utils.zipDir}`).zip('./{{name}}/build', zipFilePath).then(function(){
-  const hashOfZip = utils.md5Of(zipFilePath, 7);
-  const zipFileNameHashedPath = zipFilePath.replace('.zip', `-${hashOfZip}.zip`);
-  utils.rename(zipFilePath, zipFileNameHashedPath);
+utils.mkdir(`./${utils.zipDir}`).zip('./{{name}}/build', zipFilePath).then(function(output){
+  const hashOfZip = utils.md5Of(output, 7);
+  console.log('hash of zip:', hashOfZip);
+  const sh1 = shell.exec('git rev-parse HEAD').toString().slice(0,7)
+  console.log('SHA1 of HEAD:', sh1);
+  const zipFileNameHashedPath = output.replace('.zip', `-${hashOfZip}-${sh1}.zip`);
+  utils.rename(output, zipFileNameHashedPath);
   console.log(`${zipFileNameHashedPath} created`.green.bold);
 }).catch(function (e) {
-  console.log(`Pack build failed: e.toString()`.red.bold);
+  console.log(`Pack build failed: ${e.toString()}\n${e.stack}`.red.bold);
 });
