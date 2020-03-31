@@ -73,7 +73,7 @@ module.exports = {
       p = inquirer.prompt([{
           type: 'list',
           name: 'platform',
-          message: 'Please select platform to be pack',
+          message: 'Please select platform to be packed',
           choices: platforms
         }])
         .then(answers => answers.platform);

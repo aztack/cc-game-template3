@@ -16,3 +16,7 @@
 # Start development
 
 `npm start` or `npm run dev`
+
+# Pack
+
+`npm run pack` and then select platform build to be packed
