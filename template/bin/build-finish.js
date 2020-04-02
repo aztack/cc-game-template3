@@ -2,6 +2,11 @@ module.exports = function(options) {
   const ejs = require('ejs');
   const fs = require('fs');
   const path = require('path');
+  const indexPath = 'build/web-mobile/index.html';
+  if (!fs.existsSync(indexPath) || options.actualPlatform !== 'web-mobile') {
+    Editor.log(`Build-finish: Can not find ${indexPath}, stop post-process`);
+    return;
+  }
   const htmlPath = path.resolve(options.project, 'build/web-mobile/index.html')
   const tpl = fs.readFileSync(htmlPath).toString()
   const result = ejs.render(tpl, {
