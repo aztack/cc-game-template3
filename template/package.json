@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "node bin/init.js",
+    "list": "node bin/list.js",
     "install-module": "node bin/install.js",
     "start": "node bin/dev.js",
     "dev": "node bin/dev.js",
