@@ -81,10 +81,19 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       p.then(platform => {
+        const cwd = platformToBuildMap[platform];
+        const stat = shell.exec(`git status`).toString();
+        if (stat.indexOf('nothing') > 0) {
+          const sha1 = shell.exec(`git rev-parse HEAD`).toString();
+          fs.writeFileSync(`${cwd}/HEAD`, sha1);
+        } else {
+          reject(new Error(`Please commit your changes with a meaningful commit message before pack!`));
+          return;
+        }
+
         const archive = archiver('zip', { zlib: { level: 9 }});
         output = output.replace('.zip', `-${platform}.zip`);
         const stream = fs.createWriteStream(output);
-        const cwd = platformToBuildMap[platform];
         archive
           .glob(`**/*`, {
             cwd: cwd,
