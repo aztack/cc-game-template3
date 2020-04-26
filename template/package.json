@@ -40,6 +40,16 @@
     "ejs": "^3.0.1",
     "glob": "^7.1.6",
     "inquirer": "^7.1.0",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "cz-customizable": "^6.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./cz-config.js"
+    }
   }
+
 }
