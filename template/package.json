@@ -10,6 +10,7 @@
     "start": "node bin/dev.js",
     "dev": "node bin/dev.js",
     "build": "node bin/build.js",
+    "send": "node bin/send.js",
     "pack": "node bin/pack.js",
     "upload-test": "uploadgame --env=test",
     "upload-pre": "uploadgame --env=pre",
