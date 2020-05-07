@@ -20,7 +20,7 @@
 `npm run send [-- targetDirectoryOnDevice]`
 
 This command will let you navigate through `/storage/emulated/0/Android/data/<packageName>` on your device,
-and copy builded files into selected folder. (packageName is read from `settings/builder.json` if not provide )
+and copy builded files into selected folder. (packageName is read from `settings/builder.json` if `targetDirectoryOnDevice` is not provide )
 
 # Pack
 
