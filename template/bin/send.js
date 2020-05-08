@@ -77,7 +77,7 @@ function copyBuild(targetPath, targetDir) {
     return;
   }
 
-  ask('Which build to copy?', $glob.sync(`${buildDir}/*`))
+  ask('Please select the directory to be copied', $glob.sync(`${buildDir}/*`))
     .then(answers => {
       if (answers.target) {
         adb(`push ${pkg.name}/build/${answers.target.replace(buildDir, '')}/* ${targetPath}`, false);
