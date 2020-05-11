@@ -3,12 +3,21 @@ const shell = require('shelljs');
 const date = utils.date();
 const zipFileName = `${utils.pkg.name}-${date}.zip`;
 const zipFilePath = `./${utils.zipDir}/${zipFileName}`;
-utils.mkdir(`./${utils.zipDir}`).zip('./{{name}}/build', zipFilePath).then(function(output){
+utils.mkdir(`./${utils.zipDir}`).zip(`./${utils.projectDir}/build`, zipFilePath).then(function(output){
   const hashOfZip = utils.md5Of(output, 7);
   console.log('hash of zip:', hashOfZip);
   const sh1 = shell.exec('git rev-parse HEAD').toString().slice(0,7)
   console.log('SHA1 of HEAD:', sh1);
-  const zipFileNameHashedPath = output.replace('.zip', `-${hashOfZip}-${sh1}.zip`);
+
+  const builderConfig = utils.readLocalBuilderJson();
+  let env = 'unset';
+  if (builderConfig) {
+    env = builderConfig.debug ? 'dev' : 'prod';
+  }
+  if (env === 'unset') {
+    console.error(`Please save building settings in Cocos Creator before packing`);
+  }
+  const zipFileNameHashedPath = output.replace('.zip', `-${hashOfZip}-${sh1}-${env}.zip`);
   utils.rename(output, zipFileNameHashedPath);
   console.log(`${zipFileNameHashedPath} created`.green.bold);
 }).catch(function (e) {
