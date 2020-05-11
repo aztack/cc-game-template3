@@ -111,7 +111,9 @@ module.exports = {
   date(when) {
     return formatDate(when || new Date(), false, '-', '' ,'_');
   },
-  md5Of: md5FileSync
+  md5Of: md5FileSync,
+  tryRead: tryRead,
+  readLocalBuilderJson: readLocalBuilderJson
 };
 
 const BUFFER_SIZE = 8192
@@ -166,3 +168,19 @@ function isWsl() {
 		return false;
 	}
 };
+
+function tryRead(path, parseJSON = false) {
+  let result = null;
+  try {
+    const content = fs.readFileSync(path).toString();
+    result = parseJSON ? JSON.parse(content) : content;
+  } catch (e) {
+    console.error(`try to read ${path} failed:`.red.bold, e);
+  } finally {
+    return result
+  }
+}
+
+function readLocalBuilderJson() {
+  return tryRead(path.resolve(__dirname, '..', pkg.name, 'local', 'builder.json'), true);
+}
