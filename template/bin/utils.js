@@ -60,7 +60,7 @@ module.exports = {
   rename(src, target) {
     shell.mv(src, target);
   },
-  zip(source, output) {
+  zip(source, output, platform) {
     const builds = glob.sync(`${source}/*`).filter(p => fs.statSync(p).isDirectory());
     const platforms = builds.map(p => path.basename(p));
     const platformToBuildMap = builds.reduce((res, build, i) => {
@@ -69,14 +69,18 @@ module.exports = {
     }, {});
 
     let p = Promise.resolve(platforms[0]);
-    if (platforms.length > 0) {
-      p = inquirer.prompt([{
-          type: 'list',
-          name: 'platform',
-          message: 'Please select platform to be packed',
-          choices: platforms
-        }])
-        .then(answers => answers.platform);
+    if (typeof platform !== 'undefined') {
+      p = Promise.resolve(platform);
+    } else {
+      if (platforms.length > 0) {
+        p = inquirer.prompt([{
+            type: 'list',
+            name: 'platform',
+            message: 'Please select platform to be packed',
+            choices: platforms
+          }])
+          .then(answers => answers.platform);
+      }
     }
 
     return new Promise((resolve, reject) => {

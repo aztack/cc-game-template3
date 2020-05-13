@@ -3,7 +3,8 @@ const shell = require('shelljs');
 const date = utils.date();
 const zipFileName = `${utils.pkg.name}-${date}.zip`;
 const zipFilePath = `./${utils.zipDir}/${zipFileName}`;
-utils.mkdir(`./${utils.zipDir}`).zip(`./${utils.projectDir}/build`, zipFilePath).then(function(output){
+const platform = process.argv[2];
+utils.mkdir(`./${utils.zipDir}`).zip(`./${utils.projectDir}/build`, zipFilePath, platform).then(function(output){
   const hashOfZip = utils.md5Of(output, 7);
   console.log('hash of zip:', hashOfZip);
   const sh1 = shell.exec('git rev-parse HEAD').toString().slice(0,7)
