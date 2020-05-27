@@ -23,6 +23,11 @@ module.exports = {
       "type": "string",
       "label": "Author"
     },
+    "lang": {
+      "type": "list",
+      "choices": ["js","ts"],
+      "default": "ts",
+    },
     "ccmodulesgroup": {
       "type": "string",
       "required": true,
@@ -44,6 +49,12 @@ module.exports = {
     });
     console.log(`creating zips folder`);
     $fs.mkdirSync($path.resolve(cwd, `./zips`));
+
+    let mainScriptPath = $path.resolve(cwd, `${name}/assets/Main.js`);
+    if (data.lang === 'js') {
+      mainScriptPath = mainScriptPath.replace('Main.js', 'Main.ts');
+    }
+    $fs.unlinkSync(mainScriptPath);
 
 
     // install dependencies
