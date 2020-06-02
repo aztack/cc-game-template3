@@ -89,7 +89,7 @@ module.exports = {
         const stat = shell.exec(`git status`).toString();
         if (stat.indexOf('nothing') > 0) {
           const sha1 = shell.exec(`git rev-parse HEAD`).toString();
-          fs.writeFileSync(`${cwd}/${output.replace('.zip', '.sha1')}`, sha1);
+          fs.writeFileSync(`${cwd}/HEAD`, sha1);
         } else {
           reject(new Error(`Please commit your changes with a meaningful commit message before pack!`));
           return;
