@@ -1,3 +1,4 @@
+const $path = require('path');
 const utils = require('./utils.js');
 const shell = require('shelljs');
 const date = utils.date();
@@ -18,7 +19,8 @@ utils.mkdir(`./${utils.zipDir}`).zip(`./${utils.projectDir}/build`, zipFilePath,
   if (env === 'unset') {
     console.error(`Please save building settings in Cocos Creator before packing`);
   }
-  const zipFileNameHashedPath = output.replace('.zip', `-${hashOfZip}-${sh1}-${env}.zip`);
+  const ext = $path.extname(output);
+  const zipFileNameHashedPath = output.replace(ext, `-${hashOfZip}-${sh1}-${env}${ext}`);
   utils.rename(output, zipFileNameHashedPath);
   console.log(`${zipFileNameHashedPath} created`.green.bold);
 }).catch(function (e) {

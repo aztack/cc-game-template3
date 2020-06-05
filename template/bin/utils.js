@@ -10,7 +10,8 @@ const archiver = require('archiver');
 const inquirer = require('inquirer');
 
 const zipIgnores = {
-  'jsb-link': ['frameworks/**', '.cocos-project.json', 'cocos-project-template.json', '*.zip']
+  'jsb-link': ['frameworks/**', '.cocos-project.json', 'cocos-project-template.json', '*.zip'],
+  'cocos-play': ['*.cpk']
 };
 
 module.exports = {
@@ -96,7 +97,8 @@ module.exports = {
         }
 
         const archive = archiver('zip', { zlib: { level: 9 }});
-        output = output.replace('.zip', `-${platform}.zip`);
+        const ext = platform === 'cocos-play' ? '.cpk' : 'zip';
+        output = output.replace('.zip', `-${platform}${ext}`);
         const stream = fs.createWriteStream(output);
         archive
           .glob(`**/*`, {
