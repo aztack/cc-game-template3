@@ -97,7 +97,7 @@ module.exports = {
         }
 
         const archive = archiver('zip', { zlib: { level: 9 }});
-        const ext = platform === 'cocos-play' ? '.cpk' : 'zip';
+        const ext = platform === 'cocos-play' ? '.cpk' : '.zip';
         output = output.replace('.zip', `-${platform}${ext}`);
         const stream = fs.createWriteStream(output);
         archive
