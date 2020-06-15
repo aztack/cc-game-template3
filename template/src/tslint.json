@@ -1,17 +1,15 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
-    "quotemark": [true, "single", "jsx-double"],
+    "no-console": false,
     "class-name": true,
     "curly": [true, "ignore-same-line"],
-    "indent": [true, "spaces", 2],
     "member-access": false,
     "no-implicit-dependencies": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "prefer-const": true,
     "radix": true,
-    "semicolon": [true, "always"],
     "triple-equals": [true, "allow-null-check"],
     "variable-name": {
       "options": [
