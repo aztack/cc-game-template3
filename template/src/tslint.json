@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
+    "quotemark": [true, "single", "jsx-double"],
     "class-name": true,
     "curly": [true, "ignore-same-line"],
     "indent": [true, "spaces", 2],
