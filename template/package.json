@@ -38,11 +38,13 @@
   "devDependencies": {
     "archiver": "^3.1.1",
     "colors": "^1.4.0",
+    "cz-customizable": "^6.2.0",
     "ejs": "^3.0.1",
     "glob": "^7.1.6",
     "inquirer": "^7.1.0",
+    "prettier": "^2.0.5",
     "shelljs": "^0.8.3",
-    "cz-customizable": "^6.2.0",
+    "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0"
   },
   "config": {
@@ -53,5 +55,4 @@
       "config": "./cz-config.js"
     }
   }
-
 }
