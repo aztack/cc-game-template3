@@ -14,7 +14,8 @@
     "pack": "node bin/pack.js",
     "upload-test": "uploadgame --env=test",
     "upload-pre": "uploadgame --env=pre",
-    "upload-prod": "uploadgame --env=prod"
+    "upload-prod": "uploadgame --env=prod",
+    "tslint-check": "tslint-config-prettier-check ./{{name}}/tslint.json"
   },
   "keywords": [
     "cocos",
