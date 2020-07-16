@@ -1,6 +1,7 @@
 cc.Class({
   extends: cc.Component,
   properties: {
+    projectId: '{{name}}',
     sceneScript: true
   },
 
