@@ -15,6 +15,11 @@ function __track(msg) {
         }
     }, 'track', 'bootstrap', jsonStr);
 }
+if (typeof loadRuntime === 'function') {
+    loadRuntime().onError(function(res) {
+        __track(res.message + '\n' + res.stack);
+    });
+}
 window.boot = function () {
     __track(`Booting`);
     var settings = window._CCSettings;
