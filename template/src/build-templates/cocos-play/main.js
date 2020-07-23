@@ -7,7 +7,7 @@ function __track(msg) {
         msg: msg
     };
     let jsonStr = JSON.stringify(json);
-    console.log(eventId + ':' + jsonStr);
+    console.log(msg + ':' + jsonStr);
     runtime.callCustomCommand({
         success() {},
         fail(e) {
