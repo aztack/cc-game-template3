@@ -5,6 +5,7 @@
     "class-name": true,
     "curly": [true, "ignore-same-line"],
     "member-access": false,
+    "no-namespace": false,
     "no-implicit-dependencies": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
