@@ -1,0 +1,4 @@
+{
+  "build-start": "../bin/build-start.js",
+  "build-finish": "../bin/build-finish.js"
+}
