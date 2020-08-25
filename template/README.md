@@ -15,7 +15,7 @@
 
 `npm run build`
 
-# Send builded files to device (Android)
+# Send built files to device (Android)
 
 `npm run send [-- targetDirectoryOnDevice]`
 
