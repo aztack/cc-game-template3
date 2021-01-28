@@ -65,7 +65,7 @@ module.exports = {
       if (!err) {
         npm.install(process.cwd(), (err) => {
           if (err) {
-            console.log(`Install package failed:`, error);
+            console.log(`Install package failed:`, err);
           } else {
             npm.commands.run(['start']);
           }
